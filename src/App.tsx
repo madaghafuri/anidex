@@ -1,9 +1,7 @@
 import { useState } from 'react';
-import NavBar from './components/NavBar';
 import { css } from '@emotion/css';
 import Content from './components/Content';
 import useMediaState from './hooks/useMediaState';
-import Text from './components/UI/Text';
 import classNames from 'classnames';
 import { Provider } from 'jotai';
 
