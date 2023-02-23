@@ -15,9 +15,11 @@ const useMediaState = () => {
             console.log(media.matches);
         };
 
+        // @ts-ignore
         mq.addEventListener('change', handleMediaChange);
 
         return () => {
+            // @ts-ignore
             mq.removeEventListener('change', handleMediaChange);
         };
     });
