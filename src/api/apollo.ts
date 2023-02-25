@@ -9,6 +9,7 @@ export const GET_PAGE = gql`
     {
         Page(page: 1, perPage: 10) {
             media(type: MANGA) {
+                id
                 coverImage {
                     medium
                     color

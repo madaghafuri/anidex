@@ -4,13 +4,21 @@ import { PageResponse } from '../../api/types';
 import List from './List';
 import LoadingIcon from '../../assets/loading.svg';
 import { usePageContext } from '../../context/PageContext';
-import ScrollBar from '../UI/Scrollbar';
-import { useRef, useState } from 'react';
+import { useCollectionContext } from '../../context/CollectionContext';
+import { useEffect } from 'react';
 
 const AnimeList = () => {
     const { data, loading } = useQuery<PageResponse>(GET_PAGE);
     const { currentPage } = usePageContext();
+    const { collection, setIsCollectionMode } = useCollectionContext();
+    console.log(collection);
     const isCurrentPage = currentPage.title === 'Anime List';
+
+    useEffect(() => {
+        if (collection.length < 1) {
+            setIsCollectionMode(false);
+        }
+    }, [collection]);
 
     if (loading) return <img src={LoadingIcon} />;
 

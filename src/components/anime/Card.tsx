@@ -13,37 +13,61 @@ import { usePageContext } from '../../context/PageContext';
 import AnimeDetail from './AnimeDetail';
 import useTheme from '../../hooks/useTheme';
 import TextLabel from '../UI/TextLabel';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useCollectionContext } from '../../context/CollectionContext';
 
 type CardProps = {
     media: Media;
 };
 
 const Card = ({ media }: CardProps) => {
-    const [isSelectMode, setIsSelectMode] = useState<boolean>(false);
+    const [selected, setSelected] = useState<boolean>(false);
     const [timerId, setTimerId] = useState<number>();
 
     const updatedAt = dayjs.unix(media.updatedAt);
     const { currentTime } = useCurrentTime();
     const { setCurrentPage, setPageDetailData } = usePageContext();
     const { isDarkTheme } = useTheme();
+    const { isCollectionMode, setIsCollectionMode, setCollection } =
+        useCollectionContext();
 
     const handleClick = () => {
-        setCurrentPage({ title: 'Anime Detail', page: AnimeDetail });
-        setPageDetailData(media);
+        if (isCollectionMode && !selected) {
+            setCollection((prev) => [...prev, media]);
+            setSelected(true);
+        } else if (isCollectionMode && selected) {
+            setSelected(false);
+            setCollection((prev) => {
+                const newCollection = [...prev];
+                const targetIndex = newCollection.findIndex(
+                    (item) => item.id === media?.id
+                );
+                newCollection.splice(targetIndex, 1);
+                return newCollection;
+            });
+        } else if (!isCollectionMode && !selected) {
+            setCurrentPage({ title: 'Anime Detail', page: AnimeDetail });
+            setPageDetailData(media);
+        }
     };
 
     const handleTouchStart = () => {
         if (!timerId) {
-            setTimeout(() => {
-                setIsSelectMode(true);
-            }, 600);
+            clearTimeout(timerId);
+            setTimerId(
+                setTimeout(() => {
+                    setIsCollectionMode(true);
+                    setSelected(true);
+                    setCollection((collection) => [...collection, media]);
+                }, 600)
+            );
         }
     };
 
     const handleTouchEnd = () => {
         if (timerId) {
             clearTimeout(timerId);
+            setTimerId(null);
         }
     };
 
@@ -53,7 +77,7 @@ const Card = ({ media }: CardProps) => {
         ? 'bg-default-dark'
         : 'bg-default-light';
 
-    const selectModeStyle = isSelectMode ? 'outline outline-2' : '';
+    const selectModeStyle = selected ? 'outline outline-2' : '';
 
     return (
         <div

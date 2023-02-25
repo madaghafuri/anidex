@@ -5,6 +5,7 @@ import classNames from 'classnames';
 import { Provider } from 'jotai';
 import PageProvider from './context/PageContext';
 import NavBar from './components/NavBar';
+import CollectionProvider from './context/CollectionContext';
 
 function App() {
     const [count, setCount] = useState(0);
@@ -12,12 +13,14 @@ function App() {
 
     return (
         <PageProvider>
-            <div>
+            <CollectionProvider>
                 <Provider>
-                    {/* <NavBar /> */}
-                    <Content />
+                    <div className="flex flex-col">
+                        <NavBar />
+                        <Content />
+                    </div>
                 </Provider>
-            </div>
+            </CollectionProvider>
         </PageProvider>
     );
 }
