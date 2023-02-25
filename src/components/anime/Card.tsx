@@ -13,13 +13,16 @@ import { usePageContext } from '../../context/PageContext';
 import AnimeDetail from './AnimeDetail';
 import useTheme from '../../hooks/useTheme';
 import TextLabel from '../UI/TextLabel';
+import { useState } from 'react';
 
 type CardProps = {
     media: Media;
 };
 
 const Card = ({ media }: CardProps) => {
-    // const setCurrentPage = useSetAtom(currentPage);
+    const [isSelectMode, setIsSelectMode] = useState<boolean>(false);
+    const [timerId, setTimerId] = useState<number>();
+
     const updatedAt = dayjs.unix(media.updatedAt);
     const { currentTime } = useCurrentTime();
     const { setCurrentPage, setPageDetailData } = usePageContext();
@@ -30,16 +33,38 @@ const Card = ({ media }: CardProps) => {
         setPageDetailData(media);
     };
 
+    const handleTouchStart = () => {
+        if (!timerId) {
+            setTimeout(() => {
+                setIsSelectMode(true);
+            }, 600);
+        }
+    };
+
+    const handleTouchEnd = () => {
+        if (timerId) {
+            clearTimeout(timerId);
+        }
+    };
+
     const relativeToUpdate = currentTime.subtract(updatedAt.hour(), 'hour');
 
     const additionalCoreStyle = isDarkTheme
         ? 'bg-default-dark'
         : 'bg-default-light';
 
+    const selectModeStyle = isSelectMode ? 'outline outline-2' : '';
+
     return (
         <div
-            className={classNames(coreStyle, additionalCoreStyle)}
+            className={classNames(
+                coreStyle,
+                additionalCoreStyle,
+                selectModeStyle
+            )}
             onClick={handleClick}
+            onTouchStart={handleTouchStart}
+            onTouchEnd={handleTouchEnd}
         >
             <img src={media.coverImage.medium} alt="" className={imageStyle} />
             <div className={detailStyle}>

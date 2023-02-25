@@ -23,6 +23,28 @@
   --default-light: #e9e9e9;
 } */
 
+/* Scroll bar stylings */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: var(--lightestgrey);
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 5px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;

@@ -14,7 +14,11 @@ const ActionDetail = ({ media }: ActionDetailProps) => {
     return (
         <div className="flex flex-col gap-2">
             <div className="flex flex-row gap-2 w-full">
-                <Button icon={MenuIcon} rounded="base" className="" />
+                <Button
+                    icon={MenuIcon}
+                    rounded="base"
+                    className="hover:bg-opacity-50"
+                />
                 <Button
                     icon={BookmarkIcon}
                     rounded="base"

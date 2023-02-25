@@ -11,14 +11,14 @@ function App() {
     const isMobile = useMediaState();
 
     return (
-        <div className="">
-            <Provider>
-                <PageProvider>
+        <PageProvider>
+            <div>
+                <Provider>
                     {/* <NavBar /> */}
                     <Content />
-                </PageProvider>
-            </Provider>
-        </div>
+                </Provider>
+            </div>
+        </PageProvider>
     );
 }
 

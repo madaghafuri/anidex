@@ -1,3 +1,4 @@
+import { useRef, useState } from 'react';
 import { Media } from '../../api/types';
 import Card from './Card';
 
