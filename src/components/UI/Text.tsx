@@ -1,4 +1,3 @@
-import { css } from '@emotion/css';
 import classNames from 'classnames';
 import { ReactNode } from 'react';
 import { Size, Weight } from './types';
@@ -10,54 +9,34 @@ type TextProps = {
     children: ReactNode;
     onClick?: () => void;
     align?: 'start' | 'center' | 'end';
+    truncate?: boolean;
 };
 
 const Text = ({
     className,
     weight,
-    size,
+    size = 'base',
     children,
-    onClick,
-    align,
+    align = 'center',
 }: TextProps) => {
-    const coreStyle = css({
-        width: '100%',
-        borderRadius: '10px',
-        fontWeight: weightOption[weight],
-        fontSize: sizeOption[size],
-        fontFamily: 'monospace',
-        userSelect: 'none',
-        display: 'flex',
-        alignItems: align,
-        padding: '0 1rem 0 1rem',
-        textOverflow: 'ellipsis',
-        whiteSpace: 'nowrap',
-    });
-    const handleClick = () => {
-        onClick();
-    };
-
-    return (
-        <div className={classNames(coreStyle, className)} onClick={handleClick}>
-            {children}
-        </div>
+    const coreStyle = classNames(
+        'rounded-md',
+        `font-${weight} ${sizeOption[size]} font-mono`,
+        'select-none',
+        `flex flex-row items-${align}`,
+        'px-1 whitespace-normal'
     );
-};
 
-const weightOption = {
-    bold: 'bold',
-    bolder: 'bolder',
-    normal: 'normal',
-    lighter: 'lighter',
+    return <div className={classNames(coreStyle, className)}>{children}</div>;
 };
 
 const sizeOption = {
-    xs: '0.6rem',
-    sm: '0.8rem',
-    base: '1rem',
-    md: '1.25rem',
-    lg: '1.5rem',
-    xl: '2rem',
+    xs: 'text-xs',
+    sm: 'text-sm',
+    base: 'text-base',
+    md: 'text-md',
+    lg: 'text-lg',
+    xl: 'text-xl',
 };
 
 export default Text;

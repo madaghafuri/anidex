@@ -12,7 +12,8 @@ export interface Media {
         medium: string;
     };
     title: {
-        romaji: string;
+        userPreferred: string;
+        english: string;
     };
     updatedAt: number;
     status:
@@ -23,4 +24,8 @@ export interface Media {
         | 'HIATUS';
     volumes: number;
     favourites: number;
+    bannerImage: string;
+    genres: string[];
+    description: string;
+    averageScore: number;
 }

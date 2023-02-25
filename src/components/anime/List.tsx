@@ -1,4 +1,3 @@
-import { css } from '@emotion/css';
 import { Media } from '../../api/types';
 import Card from './Card';
 
@@ -15,12 +14,6 @@ const List = ({ mediaList }: ListProps) => {
         </div>
     );
 };
-
-const coreStyle = css({
-    display: 'flex',
-    flexDirection: 'column',
-    gap: '1rem',
-    padding: '0.8rem',
-});
+const coreStyle = 'flex flex-col gap-4 p-3';
 
 export default List;

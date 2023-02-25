@@ -14,12 +14,17 @@ export const GET_PAGE = gql`
                     color
                 }
                 title {
-                    romaji
+                    userPreferred
+                    english
                 }
                 updatedAt
                 status
                 volumes
                 favourites
+                bannerImage
+                genres
+                description
+                averageScore
             }
         }
     }
