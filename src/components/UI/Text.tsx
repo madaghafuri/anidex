@@ -18,6 +18,7 @@ const Text = ({
     size = 'base',
     children,
     align = 'center',
+    onClick = () => {},
 }: TextProps) => {
     const coreStyle = classNames(
         'rounded-md',
@@ -27,7 +28,15 @@ const Text = ({
         'px-1 whitespace-normal'
     );
 
-    return <div className={classNames(coreStyle, className)}>{children}</div>;
+    const handleClick = () => {
+        onClick();
+    };
+
+    return (
+        <div className={classNames(coreStyle, className)} onClick={handleClick}>
+            {children}
+        </div>
+    );
 };
 
 const sizeOption = {

@@ -23,7 +23,7 @@ const AnimeList = () => {
     if (loading) return <img src={LoadingIcon} />;
 
     return (
-        <div hidden={!isCurrentPage} className="w-screen h-screen">
+        <div>
             <List mediaList={data.Page.media} />
         </div>
     );

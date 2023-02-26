@@ -5,12 +5,19 @@ import { ReactComponent as BookmarkIcon } from '../../assets/bookmark.svg';
 import { ReactComponent as MenuIcon } from '../../assets/menu.svg';
 import { Media } from '../../api/types';
 import Text from '../UI/Text';
+import { setStorage } from '../../utils/storage';
+import { toast } from 'react-toastify';
 
 type ActionDetailProps = {
     media: Media;
 };
 
 const ActionDetail = ({ media }: ActionDetailProps) => {
+    const handleClick = () => {
+        setStorage('collection', JSON.stringify(media));
+        toast('Successfully Added to Collection', {});
+    };
+
     return (
         <div className="flex flex-col gap-2">
             <div className="flex flex-row gap-2 w-full">
@@ -23,6 +30,7 @@ const ActionDetail = ({ media }: ActionDetailProps) => {
                     icon={BookmarkIcon}
                     rounded="base"
                     className="grow bg-primary hover:bg-opacity-30"
+                    onClick={handleClick}
                 >
                     <Text>Add To Collection</Text>
                 </Button>

@@ -17,10 +17,10 @@ const PageTransition = ({ page, children }: PageTransitionProps) => {
             unmount={true}
             appear
             show={visible}
-            enter="transition-opacity duration-500"
+            enter="transition-opacity duration-300"
             enterFrom="opacity-0"
             enterTo="opacity-100"
-            leave="transition-opacity duration-500"
+            leave="transition-opacity duration-300"
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
         >

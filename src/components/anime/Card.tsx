@@ -21,22 +21,25 @@ type CardProps = {
 };
 
 const Card = ({ media }: CardProps) => {
-    const [selected, setSelected] = useState<boolean>(false);
     const [timerId, setTimerId] = useState<number>();
 
     const updatedAt = dayjs.unix(media.updatedAt);
     const { currentTime } = useCurrentTime();
     const { setCurrentPage, setPageDetailData } = usePageContext();
     const { isDarkTheme } = useTheme();
-    const { isCollectionMode, setIsCollectionMode, setCollection } =
+    const { isCollectionMode, setIsCollectionMode, setCollection, collection } =
         useCollectionContext();
+    const selected =
+        collection.length > 0
+            ? collection.find((item) => item.id === media?.id)?.id === media?.id
+            : false;
 
     const handleClick = () => {
         if (isCollectionMode && !selected) {
             setCollection((prev) => [...prev, media]);
-            setSelected(true);
+            // setSelected(true);
         } else if (isCollectionMode && selected) {
-            setSelected(false);
+            // setSelected(false);
             setCollection((prev) => {
                 const newCollection = [...prev];
                 const targetIndex = newCollection.findIndex(
@@ -57,7 +60,7 @@ const Card = ({ media }: CardProps) => {
             setTimerId(
                 setTimeout(() => {
                     setIsCollectionMode(true);
-                    setSelected(true);
+                    // setSelected(true);
                     setCollection((collection) => [...collection, media]);
                 }, 600)
             );

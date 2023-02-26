@@ -16,37 +16,19 @@ const pages: CurrentPage[] = [
 ];
 
 const Content = () => {
-    const [isBottom, setIsBottom] = useState<boolean>(false);
-
-    const scrollRef = useRef(null);
-    console.log(isBottom);
     const { isDarkTheme, isLightTheme } = useTheme();
-
-    const handleScroll = () => {
-        const scroll = scrollRef.current;
-        if (
-            scroll.getScrollTop() + scroll.getClientHeight() ===
-            scroll.getScrollHeight()
-        ) {
-            setIsBottom(true);
-        } else {
-            setIsBottom(false);
-        }
-    };
 
     return (
         <div className={coreStyle}>
-            <ScrollBar scrollRef={scrollRef} onScroll={handleScroll} autoHide>
-                {pages.map(({ page: Page, title }, index) => (
-                    <PageTransition key={index} page={title}>
-                        <Page key={index} />
-                    </PageTransition>
-                ))}
-            </ScrollBar>
+            {pages.map(({ page: Page, title }, index) => (
+                <PageTransition key={index} page={title}>
+                    <Page key={index} />
+                </PageTransition>
+            ))}
         </div>
     );
 };
 
-const coreStyle = 'w-screen h-screen rounded-md mt-2';
+const coreStyle = '';
 
 export default Content;
