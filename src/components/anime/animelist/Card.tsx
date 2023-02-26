@@ -1,20 +1,21 @@
-import { Media } from '../../api/types';
-import Text from '../UI/Text';
 //@ts-ignore
-import { ReactComponent as favouriteIcon } from '../../assets/favourite.svg';
+import { ReactComponent as favouriteIcon } from '../../../assets/favourite.svg';
 //@ts-ignore
-import { ReactComponent as volumeIcon } from '../../assets/volumes.svg';
+import { ReactComponent as volumeIcon } from '../../../assets/volumes.svg';
 //@ts-ignore
-import { ReactComponent as updateIcon } from '../../assets/updatedAt.svg';
-import useCurrentTime from '../../utils/useCurrentTime';
+import { ReactComponent as updateIcon } from '../../../assets/updatedAt.svg';
+
+import { useState } from 'react';
+import { Media } from '../../../api/types';
 import dayjs from 'dayjs';
+import useCurrentTime from '../../../utils/useCurrentTime';
+import { usePageContext } from '../../../context/PageContext';
+import useTheme from '../../../hooks/useTheme';
+import { useCollectionContext } from '../../../context/CollectionContext';
+import AnimeDetail from '../animedetail/AnimeDetail';
 import classNames from 'classnames';
-import { usePageContext } from '../../context/PageContext';
-import AnimeDetail from './AnimeDetail';
-import useTheme from '../../hooks/useTheme';
-import TextLabel from '../UI/TextLabel';
-import { useEffect, useState } from 'react';
-import { useCollectionContext } from '../../context/CollectionContext';
+import Text from '../../UI/Text';
+import TextLabel from '../../UI/TextLabel';
 
 type CardProps = {
     media: Media;
@@ -93,7 +94,14 @@ const Card = ({ media }: CardProps) => {
             onTouchStart={handleTouchStart}
             onTouchEnd={handleTouchEnd}
         >
-            <img src={media.coverImage.medium} alt="" className={imageStyle} />
+            <img
+                src={media.coverImage.medium}
+                alt=""
+                className={imageStyle}
+                loading="lazy"
+                width={100}
+                height={142}
+            />
             <div className={detailStyle}>
                 <Text size="xl" weight="bold">
                     {media.title.userPreferred}

@@ -12,7 +12,6 @@ const useMediaState = () => {
             event: MediaQueryListEvent
         ) => {
             setIsMobile(media.matches);
-            console.log(media.matches);
         };
 
         // @ts-ignore

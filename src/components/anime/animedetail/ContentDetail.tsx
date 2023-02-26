@@ -1,6 +1,6 @@
-import { Media } from '../../api/types';
-import Tag from '../UI/Tag';
-import Text from '../UI/Text';
+import { Media } from '../../../api/types';
+import Tag from '../../UI/Tag';
+import Text from '../../UI/Text';
 
 type ContentDetailProps = {
     media?: Media;
@@ -12,7 +12,9 @@ const ContentDetail = ({ media }: ContentDetailProps) => {
             {media?.genres.map((genre, index) => {
                 return (
                     <Tag key={index} index={index} rounded="md">
-                        <Text weight="bold">{genre}</Text>
+                        <Text weight="bold" size="sm">
+                            {genre}
+                        </Text>
                     </Tag>
                 );
             })}

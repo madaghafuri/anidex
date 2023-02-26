@@ -1,12 +1,10 @@
-import AnimeList from './anime/AnimeList';
-import CollectionList from './collection/CollectionList';
-import AnimeDetail from './anime/AnimeDetail';
-import CollectionDetail from './collection/CollectionDetail';
-import useTheme from '../hooks/useTheme';
-import PageTransition from './PageTransition';
 import { CurrentPage } from '../atom/atom';
-import { useRef, useState } from 'react';
-import ScrollBar from './UI/Scrollbar';
+import useTheme from '../hooks/useTheme';
+import AnimeDetail from './anime/animedetail/AnimeDetail';
+import AnimeList from './anime/animelist/AnimeList';
+import CollectionDetail from './collection/CollectionDetail';
+import CollectionList from './collection/CollectionList';
+import PageTransition from './PageTransition';
 
 const pages: CurrentPage[] = [
     { title: 'Anime List', page: AnimeList },

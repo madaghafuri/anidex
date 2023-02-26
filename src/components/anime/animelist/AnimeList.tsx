@@ -1,17 +1,17 @@
 import { useQuery } from '@apollo/client';
-import { GET_PAGE } from '../../api/apollo';
-import { PageResponse } from '../../api/types';
-import List from './List';
-import LoadingIcon from '../../assets/loading.svg';
-import { usePageContext } from '../../context/PageContext';
-import { useCollectionContext } from '../../context/CollectionContext';
+import { GET_PAGE } from '../../../api/apollo';
 import { useEffect } from 'react';
+import List from './List';
+//@ts-ignore
+import { ReactComponent as LoadingIcon } from '../../../assets/loading.svg';
+import { PageResponse } from '../../../api/types';
+import { usePageContext } from '../../../context/PageContext';
+import { useCollectionContext } from '../../../context/CollectionContext';
 
 const AnimeList = () => {
     const { data, loading } = useQuery<PageResponse>(GET_PAGE);
     const { currentPage } = usePageContext();
     const { collection, setIsCollectionMode } = useCollectionContext();
-    console.log(collection);
     const isCurrentPage = currentPage.title === 'Anime List';
 
     useEffect(() => {

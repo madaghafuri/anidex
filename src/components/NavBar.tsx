@@ -1,10 +1,9 @@
-import classNames from 'classnames';
 import { Fragment } from 'react';
 import { useCollectionContext } from '../context/CollectionContext';
 import { usePageContext } from '../context/PageContext';
 import useMediaState from '../hooks/useMediaState';
 import useTheme from '../hooks/useTheme';
-import AnimeList from './anime/AnimeList';
+import AnimeList from './anime/animelist/AnimeList';
 import Text from './UI/Text';
 
 const NavBar = () => {
@@ -17,8 +16,12 @@ const NavBar = () => {
         setCurrentPage({ title: 'Anime List', page: AnimeList });
     };
 
+    const theme = isLightTheme ? 'bg-default-light' : 'bg-default-dark';
+
     return (
-        <div className="flex flex-row bg-default-dark p-2 justify-around sticky top-0">
+        <div
+            className={`flex flex-row ${theme} p-2 justify-around sticky top-0`}
+        >
             {isCollectionMode ? (
                 <Text>{collection.length}</Text>
             ) : (

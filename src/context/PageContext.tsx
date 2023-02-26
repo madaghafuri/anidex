@@ -8,7 +8,7 @@ import {
     useState,
 } from 'react';
 import { Media } from '../api/types';
-import AnimeList from '../components/anime/AnimeList';
+import AnimeList from '../components/anime/animelist/AnimeList';
 
 type Page =
     | 'Anime List'

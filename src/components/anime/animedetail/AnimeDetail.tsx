@@ -1,4 +1,4 @@
-import { usePageContext } from '../../context/PageContext';
+import { usePageContext } from '../../../context/PageContext';
 import ActionDetail from './ActionDetail';
 import ContentDetail from './ContentDetail';
 import HeadDetail from './HeadDetail';

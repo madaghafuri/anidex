@@ -22,7 +22,7 @@ const Text = ({
 }: TextProps) => {
     const coreStyle = classNames(
         'rounded-md',
-        `font-${weight} ${sizeOption[size]} font-mono`,
+        `${weightOption[weight]} ${sizeOption[size]} font-mono`,
         'select-none',
         `flex flex-row items-${align}`,
         'px-1 whitespace-normal'
@@ -46,6 +46,16 @@ const sizeOption = {
     md: 'text-md',
     lg: 'text-lg',
     xl: 'text-xl',
+};
+
+const weightOption = {
+    thin: 'font-thin',
+    extralight: 'font-extralight',
+    light: 'font-light',
+    normal: 'font-normal',
+    medium: 'font-medium',
+    bold: 'font-bold',
+    extrabold: 'font-extrabold',
 };
 
 export default Text;
