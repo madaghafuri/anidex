@@ -56,7 +56,7 @@ const Card = ({ media }: CardProps) => {
     };
 
     const handleTouchStart = () => {
-        if (!timerId) {
+        if (!timerId && !isCollectionMode) {
             clearTimeout(timerId);
             setTimerId(
                 setTimeout(() => {
