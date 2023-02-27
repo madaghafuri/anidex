@@ -1,5 +1,5 @@
 import { Transition } from '@headlessui/react';
-import { useCollectionContext } from '../context/CollectionContext';
+import { Collection, useCollectionContext } from '../context/CollectionContext';
 import Button from './UI/Button';
 import Text from './UI/Text';
 //@ts-ignore
@@ -7,16 +7,31 @@ import { ReactComponent as BookmarkIcon } from '../assets/bookmark.svg';
 import { setStorage } from '../utils/storage';
 import { toast } from 'react-toastify';
 import useTheme from '../hooks/useTheme';
+import { useModal } from '../context/ModalContext';
+import CollectionModal from './modal/CollectionModal';
 
 const Action = () => {
-    const { isCollectionMode, collection, setCollection, setIsCollectionMode } =
-        useCollectionContext();
+    const {
+        isCollectionMode,
+        tempCollection,
+        setTempCollection,
+        setIsCollectionMode,
+        setCollection,
+        collection,
+    } = useCollectionContext();
+    const { showModal } = useModal();
     const { isDarkTheme } = useTheme();
 
     const handleClick = () => {
-        setStorage('collection', JSON.stringify(collection));
-        setCollection([]);
-        toast('Successfully Added to Collection');
+        const newCollection: Collection[] = [
+            ...collection,
+            { name: 'weekly', collection: tempCollection },
+        ];
+        setStorage('collection', JSON.stringify(newCollection));
+        setTempCollection([]);
+        // toast('Successfully Added to new Collection');
+        showModal(<CollectionModal />);
+        return;
     };
 
     return (

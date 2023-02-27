@@ -28,20 +28,23 @@ const Card = ({ media }: CardProps) => {
     const { currentTime } = useCurrentTime();
     const { setCurrentPage, setPageDetailData } = usePageContext();
     const { isDarkTheme } = useTheme();
-    const { isCollectionMode, setIsCollectionMode, setCollection, collection } =
-        useCollectionContext();
+    const {
+        isCollectionMode,
+        setIsCollectionMode,
+        setTempCollection,
+        tempCollection,
+    } = useCollectionContext();
     const selected =
-        collection.length > 0
-            ? collection.find((item) => item.id === media?.id)?.id === media?.id
+        tempCollection.length > 0
+            ? tempCollection.find((item) => item.id === media?.id)?.id ===
+              media?.id
             : false;
 
     const handleClick = () => {
         if (isCollectionMode && !selected) {
-            setCollection((prev) => [...prev, media]);
-            // setSelected(true);
+            setTempCollection((prev) => [...prev, media]);
         } else if (isCollectionMode && selected) {
-            // setSelected(false);
-            setCollection((prev) => {
+            setTempCollection((prev) => {
                 const newCollection = [...prev];
                 const targetIndex = newCollection.findIndex(
                     (item) => item.id === media?.id
@@ -61,8 +64,10 @@ const Card = ({ media }: CardProps) => {
             setTimerId(
                 setTimeout(() => {
                     setIsCollectionMode(true);
-                    // setSelected(true);
-                    setCollection((collection) => [...collection, media]);
+                    setTempCollection((tempCollection) => [
+                        ...tempCollection,
+                        media,
+                    ]);
                 }, 600)
             );
         }
@@ -98,7 +103,6 @@ const Card = ({ media }: CardProps) => {
                 src={media.coverImage.medium}
                 alt=""
                 className={imageStyle}
-                loading="lazy"
                 width={100}
                 height={142}
             />

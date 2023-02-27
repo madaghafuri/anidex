@@ -11,16 +11,16 @@ import { useCollectionContext } from '../../../context/CollectionContext';
 const AnimeList = () => {
     const { data, loading } = useQuery<PageResponse>(GET_PAGE);
     const { currentPage } = usePageContext();
-    const { collection, setIsCollectionMode } = useCollectionContext();
+    const { tempCollection, setIsCollectionMode } = useCollectionContext();
     const isCurrentPage = currentPage.title === 'Anime List';
 
     useEffect(() => {
-        if (collection.length < 1) {
+        if (tempCollection.length < 1) {
             setIsCollectionMode(false);
         }
-    }, [collection]);
+    }, [tempCollection]);
 
-    if (loading) return <img src={LoadingIcon} />;
+    if (loading) return <LoadingIcon />;
 
     return (
         <div>

@@ -4,11 +4,20 @@ import './index.css';
 import { ApolloProvider } from '@apollo/client';
 import App from './App';
 import { apolloClient } from './api/apollo';
+import PageProvider from './context/PageContext';
+import ModalProvider from './context/ModalContext';
+import CollectionProvider from './context/CollectionContext';
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
     <React.StrictMode>
         <ApolloProvider client={apolloClient}>
-            <App />
+            <PageProvider>
+                <ModalProvider>
+                    <CollectionProvider>
+                        <App />
+                    </CollectionProvider>
+                </ModalProvider>
+            </PageProvider>
         </ApolloProvider>
     </React.StrictMode>
 );

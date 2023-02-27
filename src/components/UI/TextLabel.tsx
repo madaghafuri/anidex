@@ -22,13 +22,6 @@ const TextLabel = ({
     weight,
     color,
 }: TextLabelProps) => {
-    const { isDarkTheme } = useTheme();
-
-    const iconStyle = classNames(
-        { [`stroke-default-dark`]: isDarkTheme },
-        { ['stroke-default-light']: !isDarkTheme }
-    );
-
     const thisStyle = classNames(
         'flex flex-row',
         'justify-start items-center',
@@ -37,7 +30,7 @@ const TextLabel = ({
 
     return (
         <div className={classNames(thisStyle, className)}>
-            <Icon Image={icon} className={iconStyle} />
+            <Icon Image={icon} />
             <Text size={size} weight={weight}>
                 {children}
             </Text>
