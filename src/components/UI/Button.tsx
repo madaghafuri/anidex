@@ -13,6 +13,7 @@ type ButtonProps = {
     width?: string;
     height?: string;
     className?: string;
+    enable?: boolean;
 };
 
 const Button = ({
@@ -23,6 +24,7 @@ const Button = ({
     width,
     height,
     className,
+    enable = true,
 }: ButtonProps) => {
     const { isDarkTheme, isLightTheme } = useTheme();
 
@@ -30,11 +32,13 @@ const Button = ({
         'flex flex-row items-center justify-center gap-1 w-auto p-1',
         roundedOption[rounded],
         { 'bg-default-dark': isDarkTheme },
-        { 'bg-default-light': isLightTheme }
+        { 'bg-default-light': isLightTheme },
+        { 'opacity-50': !enable }
     );
 
     const handleClick = () => {
-        onClick();
+        if (!enable) return;
+        onClick?.();
     };
 
     return (
@@ -42,7 +46,7 @@ const Button = ({
             className={classNames(containerStyle, className)}
             onClick={handleClick}
         >
-            <Icon Image={icon} width={width} height={height} />
+            {icon ? <Icon Image={icon} width={width} height={height} /> : null}
             {children}
         </div>
     );

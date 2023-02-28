@@ -17,6 +17,7 @@ const HeadDetail = ({ media }: HeadDetailProps) => {
             <img
                 src={media?.coverImage.medium}
                 className="rounded drop-shadow-xl"
+                loading="lazy"
             />
             <div className="flex flex-col gap-3">
                 <Text size="xl" weight="bold">

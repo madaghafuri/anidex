@@ -6,15 +6,21 @@ import { toast } from 'react-toastify';
 import { Media } from '../../../api/types';
 import { setStorage } from '../../../utils/storage';
 import Button from '../../UI/Button';
+import { useModal } from '../../../context/ModalContext';
+import AddToCollectionModal from '../../modal/AddToCollectionModal';
 
 type ActionDetailProps = {
     media: Media;
 };
 
 const ActionDetail = ({ media }: ActionDetailProps) => {
+    const { showModal } = useModal();
+
     const handleClick = () => {
-        setStorage('collection', JSON.stringify(media));
-        toast('Successfully Added to Collection', {});
+        // setStorage('collection', JSON.stringify(media));
+        // toast('Successfully Added to Collection', {});
+        showModal(<AddToCollectionModal />);
+        return;
     };
 
     return (

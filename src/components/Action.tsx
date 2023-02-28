@@ -8,14 +8,13 @@ import { setStorage } from '../utils/storage';
 import { toast } from 'react-toastify';
 import useTheme from '../hooks/useTheme';
 import { useModal } from '../context/ModalContext';
-import CollectionModal from './modal/CollectionModal';
+import AddToCollectionModal from './modal/AddToCollectionModal';
 
 const Action = () => {
     const {
         isCollectionMode,
         tempCollection,
         setTempCollection,
-        setIsCollectionMode,
         setCollection,
         collection,
     } = useCollectionContext();
@@ -23,14 +22,15 @@ const Action = () => {
     const { isDarkTheme } = useTheme();
 
     const handleClick = () => {
-        const newCollection: Collection[] = [
-            ...collection,
-            { name: 'weekly', collection: tempCollection },
-        ];
-        setStorage('collection', JSON.stringify(newCollection));
+        // const newCollection: Collection[] = [
+        //     ...collection,
+        //     { name: 'weekly', collection: tempCollection },
+        // ];
+        // setStorage('collection', JSON.stringify(newCollection));
         setTempCollection([]);
+        // setCollection(newCollection);
         // toast('Successfully Added to new Collection');
-        showModal(<CollectionModal />);
+        showModal(<AddToCollectionModal />);
         return;
     };
 

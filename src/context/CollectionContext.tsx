@@ -29,7 +29,18 @@ type CollectionState = {
     setTempCollection: Dispatch<SetStateAction<Media[]>>;
 };
 
-const CollectionContext = createContext<CollectionState | null>(null);
+const defaultCollState: CollectionState = {
+    isCollectionMode: false,
+    setIsCollectionMode: () => {},
+    collection: [],
+    setCollection: () => {},
+    tempCollection: [],
+    setTempCollection: () => {},
+};
+
+const CollectionContext = createContext<CollectionState | null>(
+    defaultCollState
+);
 
 const CollectionProvider = ({ children }: { children: ReactNode }) => {
     const [isCollectionMode, setIsCollectionMode] = useState<boolean>(false);

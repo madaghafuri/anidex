@@ -1,6 +1,4 @@
 import { useEffect, useState } from 'react';
-import { Collection } from '../../context/CollectionContext';
-import { usePageContext } from '../../context/PageContext';
 import { getStorage } from '../../utils/storage';
 import Button from '../UI/Button';
 import Text from '../UI/Text';
@@ -11,13 +9,25 @@ import { useModal } from '../../context/ModalContext';
 import NewCollection from '../modal/NewCollection';
 
 const CollectionList = () => {
-    const [collection, setCollection] = useState<Collection[]>([]);
-    console.log(collection);
+    const [collection, setCollection] = useState<[]>([]);
     const { showModal } = useModal();
+    console.log(collection);
 
     useEffect(() => {
-        const colls = getStorage('collection');
-        setCollection(JSON.parse(colls));
+        const colls = JSON.parse(getStorage('collection'));
+        setCollection(colls);
+    }, []);
+
+    useEffect(() => {
+        const handleStorage = () => {
+            const colls = JSON.parse(getStorage('collection'));
+            setCollection(colls);
+        };
+
+        window.addEventListener('storage', handleStorage);
+        return () => {
+            window.removeEventListener('storage', handleStorage);
+        };
     }, []);
 
     const handleAdd = () => {
@@ -26,9 +36,9 @@ const CollectionList = () => {
     };
 
     return (
-        <div className="p-3 flex flex-col">
-            {(collection || []).map((item, index) => (
-                <Card key={index} item={item} />
+        <div className="p-3 flex flex-col gap-2">
+            {Object.entries(collection).map(([key, value], index) => (
+                <Card key={index} title={key} value={value} />
             ))}
             <Button
                 icon={PlusIcon}
@@ -36,7 +46,9 @@ const CollectionList = () => {
                 className="fixed bottom-3 self-end bg-primary"
                 onClick={handleAdd}
             >
-                <Text size="lg">Add</Text>
+                <Text size="lg" weight="bold">
+                    Add
+                </Text>
             </Button>
         </div>
     );

@@ -64,3 +64,11 @@
     background-color: #191a1c;
   }
 }
+
+input[type='text'] {
+  all: unset;
+  outline-style: solid;
+  outline-offset: 5px;
+  border-radius: 0.1rem;
+  outline-color: #a5d2ff;
+}
