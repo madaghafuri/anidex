@@ -9,6 +9,7 @@ import { toast } from 'react-toastify';
 import useTheme from '../hooks/useTheme';
 import { useModal } from '../context/ModalContext';
 import AddToCollectionModal from './modal/AddToCollectionModal';
+import { Media } from '../api/types';
 
 const Action = () => {
     const {
@@ -16,19 +17,14 @@ const Action = () => {
         tempCollection,
         setTempCollection,
         setCollection,
-        collection,
     } = useCollectionContext();
     const { showModal } = useModal();
     const { isDarkTheme } = useTheme();
 
     const handleClick = () => {
-        // const newCollection: Collection[] = [
-        //     ...collection,
-        //     { name: 'weekly', collection: tempCollection },
-        // ];
-        // setStorage('collection', JSON.stringify(newCollection));
+        const newCollection: Media[] = [...tempCollection];
         setTempCollection([]);
-        // setCollection(newCollection);
+        setCollection(newCollection);
         // toast('Successfully Added to new Collection');
         showModal(<AddToCollectionModal />);
         return;

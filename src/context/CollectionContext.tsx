@@ -22,8 +22,8 @@ type CollectionState = {
     /**
      * Collection for local storage. It is persistent
      */
-    collection: Collection[];
-    setCollection: Dispatch<SetStateAction<Collection[]>>;
+    collection: Media[];
+    setCollection: Dispatch<SetStateAction<Media[]>>;
 
     tempCollection: Media[];
     setTempCollection: Dispatch<SetStateAction<Media[]>>;
@@ -44,7 +44,7 @@ const CollectionContext = createContext<CollectionState | null>(
 
 const CollectionProvider = ({ children }: { children: ReactNode }) => {
     const [isCollectionMode, setIsCollectionMode] = useState<boolean>(false);
-    const [collection, setCollection] = useState<Collection[]>([]);
+    const [collection, setCollection] = useState<Media[]>([]);
     const [tempCollection, setTempCollection] = useState<Media[]>([]);
 
     return (

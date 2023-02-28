@@ -105,6 +105,7 @@ const Card = ({ media }: CardProps) => {
                 className={imageStyle}
                 width={100}
                 height={142}
+                loading="lazy"
             />
             <div className={detailStyle}>
                 <Text size="xl" weight="bold">
