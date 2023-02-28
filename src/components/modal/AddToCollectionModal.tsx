@@ -13,21 +13,16 @@ function AddToCollectionModal() {
     const [addedTo, setAddedTo] = useState<string[]>([]);
     const { closeModal } = useModal();
     const { setCurrentPage } = usePageContext();
-    const { collection } = useCollectionContext();
+    const { addToCollection, setTempCollection } = useCollectionContext();
     console.log(addedTo);
 
     useEffect(() => {
-        const collections = getStorage('collection');
-        setCollectionObj(JSON.parse(collections));
+        const collections = JSON.parse(getStorage('collection') || '{}');
+        setCollectionObj(collections);
     }, []);
 
     const handleOK = () => {
-        const colls = JSON.parse(getStorage('collection'));
-        const newColls = { ...colls };
-        addedTo.forEach((item) => {
-            newColls[item] = [...newColls[item], ...collection];
-        });
-        setStorage('collection', JSON.stringify(newColls));
+        addToCollection(addedTo, collectionObj);
         toast('Successfully Added to Collection');
         closeModal();
         return;
@@ -35,6 +30,7 @@ function AddToCollectionModal() {
 
     const handleEdit = () => {
         setCurrentPage({ title: 'Collection List', page: CollectionList });
+        setTempCollection([]);
         closeModal();
         return;
     };
@@ -45,7 +41,7 @@ function AddToCollectionModal() {
     };
 
     const handleChecked = (event: ChangeEvent<HTMLInputElement>) => {
-        console.log(collection);
+        console.log(collectionObj);
         if (event.target.checked) {
             setAddedTo((state) => {
                 const newState = [...state, event.target.value];

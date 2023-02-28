@@ -1,3 +1,4 @@
+import { useCollectionContext } from '../../context/CollectionContext';
 import { useModal } from '../../context/ModalContext';
 import { getStorage, removeItem, setStorage } from '../../utils/storage';
 import Button from '../UI/Button';
@@ -9,12 +10,10 @@ type DeleteCollectionProps = {
 
 function DeleteCollection({ title }: DeleteCollectionProps) {
     const { closeModal } = useModal();
+    const { deleteCollection } = useCollectionContext();
 
     const handleOK = async () => {
-        const collection = JSON.parse(getStorage('collection'));
-        const newColl = { ...collection };
-        delete newColl[title];
-        setStorage('collection', JSON.stringify(newColl));
+        deleteCollection(title);
         window.dispatchEvent(new Event('storage'));
         closeModal();
     };

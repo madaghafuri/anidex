@@ -1,31 +1,19 @@
 import { Transition } from '@headlessui/react';
-import { Collection, useCollectionContext } from '../context/CollectionContext';
+import { useCollectionContext } from '../context/CollectionContext';
 import Button from './UI/Button';
 import Text from './UI/Text';
 //@ts-ignore
 import { ReactComponent as BookmarkIcon } from '../assets/bookmark.svg';
-import { setStorage } from '../utils/storage';
-import { toast } from 'react-toastify';
 import useTheme from '../hooks/useTheme';
 import { useModal } from '../context/ModalContext';
 import AddToCollectionModal from './modal/AddToCollectionModal';
-import { Media } from '../api/types';
 
 const Action = () => {
-    const {
-        isCollectionMode,
-        tempCollection,
-        setTempCollection,
-        setCollection,
-    } = useCollectionContext();
+    const { isCollectionMode } = useCollectionContext();
     const { showModal } = useModal();
     const { isDarkTheme } = useTheme();
 
     const handleClick = () => {
-        const newCollection: Media[] = [...tempCollection];
-        setTempCollection([]);
-        setCollection(newCollection);
-        // toast('Successfully Added to new Collection');
         showModal(<AddToCollectionModal />);
         return;
     };

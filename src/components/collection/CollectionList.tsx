@@ -14,13 +14,13 @@ const CollectionList = () => {
     console.log(collection);
 
     useEffect(() => {
-        const colls = JSON.parse(getStorage('collection'));
+        const colls = JSON.parse(getStorage('collection') || '{}');
         setCollection(colls);
     }, []);
 
     useEffect(() => {
         const handleStorage = () => {
-            const colls = JSON.parse(getStorage('collection'));
+            const colls = JSON.parse(getStorage('collection') || '{}');
             setCollection(colls);
         };
 
@@ -37,7 +37,7 @@ const CollectionList = () => {
 
     return (
         <div className="p-3 flex flex-col gap-2">
-            {Object.entries(collection).map(([key, value], index) => (
+            {(Object.entries(collection) || [])?.map(([key, value], index) => (
                 <Card key={index} title={key} value={value} />
             ))}
             <Button

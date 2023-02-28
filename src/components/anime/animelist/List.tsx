@@ -1,4 +1,6 @@
+import { useEffect } from 'react';
 import { Media } from '../../../api/types';
+import { setStorage } from '../../../utils/storage';
 import Card from './Card';
 
 type ListProps = {

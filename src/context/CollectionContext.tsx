@@ -4,13 +4,14 @@ import {
     ReactNode,
     SetStateAction,
     useContext,
+    useReducer,
     useState,
 } from 'react';
 import { Media } from '../api/types';
+import { getStorage, setStorage } from '../utils/storage';
 
 export type Collection = {
-    name: string;
-    collection: Media[];
+    [key: string]: Media[];
 };
 
 type CollectionState = {
@@ -22,20 +23,23 @@ type CollectionState = {
     /**
      * Collection for local storage. It is persistent
      */
-    collection: Media[];
-    setCollection: Dispatch<SetStateAction<Media[]>>;
 
     tempCollection: Media[];
     setTempCollection: Dispatch<SetStateAction<Media[]>>;
+
+    addNewCollection: (collectionName: string) => void;
+    deleteCollection: (collectionName: string) => void;
+    addToCollection: (addedTo: string[], collObj: object) => void;
 };
 
 const defaultCollState: CollectionState = {
     isCollectionMode: false,
     setIsCollectionMode: () => {},
-    collection: [],
-    setCollection: () => {},
     tempCollection: [],
     setTempCollection: () => {},
+    addNewCollection: () => {},
+    deleteCollection: () => {},
+    addToCollection: () => {},
 };
 
 const CollectionContext = createContext<CollectionState | null>(
@@ -44,18 +48,43 @@ const CollectionContext = createContext<CollectionState | null>(
 
 const CollectionProvider = ({ children }: { children: ReactNode }) => {
     const [isCollectionMode, setIsCollectionMode] = useState<boolean>(false);
-    const [collection, setCollection] = useState<Media[]>([]);
     const [tempCollection, setTempCollection] = useState<Media[]>([]);
+
+    const addNewCollection = (collectionName: string) => {
+        const collection = JSON.parse(getStorage('collection') || '{}');
+        setStorage(
+            'collection',
+            JSON.stringify({ ...collection, [collectionName]: [] })
+        );
+        setTempCollection([]);
+    };
+
+    const deleteCollection = (collectionName: string) => {
+        const collection = JSON.parse(getStorage('collection') || '{}');
+        const newColl = { ...collection };
+        delete newColl[collectionName];
+        setStorage('collection', JSON.stringify(newColl));
+    };
+
+    const addToCollection = (addedTo: string[], collObj: object[]) => {
+        const newColls = { ...collObj };
+        addedTo.forEach((item) => {
+            newColls[item] = [...newColls[item], ...tempCollection];
+        });
+        setStorage('collection', JSON.stringify(newColls));
+        setTempCollection([]);
+    };
 
     return (
         <CollectionContext.Provider
             value={{
                 isCollectionMode,
-                collection,
                 tempCollection,
-                setCollection,
                 setIsCollectionMode,
                 setTempCollection,
+                addNewCollection,
+                deleteCollection,
+                addToCollection,
             }}
         >
             {children}

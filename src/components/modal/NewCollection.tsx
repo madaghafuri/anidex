@@ -1,5 +1,6 @@
 import classNames from 'classnames';
 import { ChangeEvent, useState } from 'react';
+import { useCollectionContext } from '../../context/CollectionContext';
 import { useModal } from '../../context/ModalContext';
 import useTheme from '../../hooks/useTheme';
 import { getStorage, setStorage } from '../../utils/storage';
@@ -10,6 +11,7 @@ function NewCollection() {
     const [collectionName, setCollectionName] = useState<string>('');
     const { isDarkTheme } = useTheme();
     const { closeModal } = useModal();
+    const { addNewCollection } = useCollectionContext();
 
     const themeStyle = isDarkTheme ? 'bg-default-dark' : 'bg-default-light';
 
@@ -18,11 +20,7 @@ function NewCollection() {
     };
 
     const handleAdd = () => {
-        const collection = JSON.parse(getStorage('collection'));
-        setStorage(
-            'collection',
-            JSON.stringify({ ...collection, [collectionName]: null })
-        );
+        addNewCollection(collectionName);
         window.dispatchEvent(new Event('storage'));
         closeModal();
         return;
