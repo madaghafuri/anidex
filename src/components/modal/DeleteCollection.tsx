@@ -1,6 +1,5 @@
 import { useCollectionContext } from '../../context/CollectionContext';
 import { useModal } from '../../context/ModalContext';
-import { getStorage, removeItem, setStorage } from '../../utils/storage';
 import Button from '../UI/Button';
 import Text from '../UI/Text';
 

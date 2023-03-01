@@ -1,6 +1,5 @@
 import classNames from 'classnames';
 import { ReactNode } from 'react';
-import useTheme from '../../hooks/useTheme';
 import Icon from './Icon';
 import Text from './Text';
 import { Size, Weight } from './types';

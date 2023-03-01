@@ -1,18 +1,14 @@
-import { useQuery } from '@apollo/client';
-import { GET_PAGE } from '../../../api/apollo';
 import { useEffect } from 'react';
 import List from './List';
-//@ts-ignore
-import { ReactComponent as LoadingIcon } from '../../../assets/loading.svg';
-import { PageResponse } from '../../../api/types';
-import { usePageContext } from '../../../context/PageContext';
+import { Media } from '../../../api/types';
 import { useCollectionContext } from '../../../context/CollectionContext';
 
-const AnimeList = () => {
-    const { data, loading } = useQuery<PageResponse>(GET_PAGE);
-    const { currentPage } = usePageContext();
+export type AnimeListProps = {
+    media: Media[];
+};
+
+const AnimeList = ({ media }: AnimeListProps) => {
     const { tempCollection, setIsCollectionMode } = useCollectionContext();
-    const isCurrentPage = currentPage.title === 'Anime List';
 
     useEffect(() => {
         if (tempCollection.length < 1) {
@@ -20,11 +16,9 @@ const AnimeList = () => {
         }
     }, [tempCollection]);
 
-    if (loading) return <LoadingIcon />;
-
     return (
         <div>
-            <List mediaList={data.Page.media} />
+            <List mediaList={media} />
         </div>
     );
 };

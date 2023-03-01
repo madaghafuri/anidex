@@ -18,7 +18,7 @@ export default defineConfig({
                 short_name: 'AniDex',
                 description:
                     'Discover and browse anime. Add anime to you collections',
-                theme_color: '#ffffff',
+                theme_color: '#191a1c',
                 icons: [
                     {
                         src: 'manifest-icon-192.maskable.png',
@@ -45,7 +45,7 @@ export default defineConfig({
                         purpose: 'maskable',
                     },
                 ],
-                background_color: '#ffffff',
+                background_color: '#191a1c',
             },
         }),
     ],

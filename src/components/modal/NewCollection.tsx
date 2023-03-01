@@ -3,7 +3,6 @@ import { ChangeEvent, useState } from 'react';
 import { useCollectionContext } from '../../context/CollectionContext';
 import { useModal } from '../../context/ModalContext';
 import useTheme from '../../hooks/useTheme';
-import { getStorage, setStorage } from '../../utils/storage';
 import Button from '../UI/Button';
 import Text from '../UI/Text';
 

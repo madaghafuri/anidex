@@ -3,7 +3,13 @@ export interface PageResponse {
 }
 
 export interface Page {
+    pageInfo: PageInfo;
     media: Media[];
+}
+
+export interface PageInfo {
+    currentPage: number;
+    lastPage: number;
 }
 
 export interface Media {

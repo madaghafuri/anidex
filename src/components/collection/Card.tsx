@@ -1,4 +1,3 @@
-import { Collection } from '../../context/CollectionContext';
 import Button from '../UI/Button';
 import Text from '../UI/Text';
 //@ts-ignore

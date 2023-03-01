@@ -49,6 +49,7 @@
   :root {
     color: #213547;
     background-color: #edf1f5;
+    fill: #edf1f5;
   }
   a:hover {
     color: #747bff;

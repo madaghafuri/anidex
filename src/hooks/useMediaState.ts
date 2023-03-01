@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 
-const mediaQuery = 'screen and (max-width: 768px)';
 const breakpoints = {
     xs: 320,
     sm: 481,

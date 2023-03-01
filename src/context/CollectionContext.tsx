@@ -4,7 +4,6 @@ import {
     ReactNode,
     SetStateAction,
     useContext,
-    useReducer,
     useState,
 } from 'react';
 import { Media } from '../api/types';

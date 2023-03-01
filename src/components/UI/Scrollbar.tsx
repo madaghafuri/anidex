@@ -1,4 +1,4 @@
-import React, { CSSProperties, FC, MutableRefObject, ReactNode } from 'react';
+import { CSSProperties, FC, MutableRefObject, ReactNode } from 'react';
 import { Scrollbars } from 'react-custom-scrollbars-2';
 
 interface ScrollBarProps {

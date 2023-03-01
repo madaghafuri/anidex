@@ -1,6 +1,4 @@
-import { useEffect } from 'react';
 import { Media } from '../../../api/types';
-import { setStorage } from '../../../utils/storage';
 import Card from './Card';
 
 type ListProps = {
@@ -10,7 +8,7 @@ type ListProps = {
 const List = ({ mediaList }: ListProps) => {
     return (
         <div className={coreStyle}>
-            {mediaList.map((media, index) => (
+            {mediaList?.map((media, index) => (
                 <Card key={index} media={media} />
             ))}
         </div>

@@ -5,9 +5,14 @@ export const apolloClient = new ApolloClient({
     cache: new InMemoryCache(),
 });
 
-export const GET_PAGE = gql`
+export const getPageQuery = (pageNumber: number) => {
+    return gql`
     {
-        Page(page: 1, perPage: 21) {
+        Page(page: ${pageNumber}, perPage: 10) {
+            pageInfo {
+                currentPage
+                lastPage
+            }
             media(type: MANGA) {
                 id
                 coverImage {
@@ -30,3 +35,4 @@ export const GET_PAGE = gql`
         }
     }
 `;
+};
