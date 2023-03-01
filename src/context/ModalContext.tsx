@@ -42,12 +42,12 @@ function ModalProvider({ children }: { children: ReactNode }) {
                     as="div"
                     onClose={closeModal}
                     className={classNames(
-                        'fixed left-20 right-20 top-20 bottom-20 inset-0 z-40 overflow-auto rounded-lg',
+                        'fixed inset-x-10 inset-y-40 z-40 overflow-auto rounded-lg',
                         themeStyle
                     )}
                 >
                     <Transition.Child as={Fragment}>
-                        <Dialog.Panel className="flex flex-col w-full overflow-hidden p-2">
+                        <Dialog.Panel className="flex flex-col">
                             <Button
                                 icon={CloseIcon}
                                 onClick={closeModal}

@@ -5,7 +5,13 @@ import useMediaState from '../hooks/useMediaState';
 import useTheme from '../hooks/useTheme';
 import AnimeList from './anime/animelist/AnimeList';
 import CollectionList from './collection/CollectionList';
+import Button from './UI/Button';
 import Text from './UI/Text';
+
+//@ts-ignore
+import { ReactComponent as ViteLogo } from '../assets/vite.svg';
+//@ts-ignore
+import { ReactComponent as CollectionLogo } from '../assets/bookmark.svg';
 
 const NavBar = () => {
     const isMobile = useMediaState();
@@ -25,29 +31,22 @@ const NavBar = () => {
 
     return (
         <div
-            className={`flex flex-row ${theme} p-2 justify-around sticky top-0`}
+            className={`flex flex-row ${theme} p-5 justify-around sticky top-0`}
         >
             {isCollectionMode ? (
                 <Text>{tempCollection.length}</Text>
             ) : (
-                <Fragment>
-                    <Text
-                        size="md"
-                        weight="bold"
-                        align="start"
-                        onClick={handleAnimeList}
-                    >
-                        Anime List
-                    </Text>
-                    <Text
-                        size="md"
-                        weight="bold"
-                        align="start"
+                <div className="w-full flex flex-row items-center justify-between">
+                    <Button icon={ViteLogo} onClick={handleAnimeList}>
+                        <Text size="xl" weight="extrabold">
+                            AniDex
+                        </Text>
+                    </Button>
+                    <Button
+                        icon={CollectionLogo}
                         onClick={handleCollectionList}
-                    >
-                        Collection List
-                    </Text>
-                </Fragment>
+                    />
+                </div>
             )}
         </div>
     );

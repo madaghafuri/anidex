@@ -41,7 +41,7 @@ function NewCollection() {
                 className="p-1.5 rounded-md"
                 required
             />
-            <div className="flex flex-row self-end gap-5">
+            <div className="flex self-end gap-5">
                 <Button onClick={handleCancel}>
                     <Text>Cancel</Text>
                 </Button>
@@ -53,6 +53,6 @@ function NewCollection() {
     );
 }
 
-const containerStyle = 'flex flex-col gap-4 p-2';
+const containerStyle = 'flex flex-col gap-4 p-6';
 
 export default NewCollection;

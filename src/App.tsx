@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import Content from './components/Content';
 import useMediaState from './hooks/useMediaState';
 import { Provider } from 'jotai';
@@ -11,7 +11,6 @@ import { ToastContainer, Bounce } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import useTheme from './hooks/useTheme';
 import classNames from 'classnames';
-import { getStorage, setStorage } from './utils/storage';
 
 function App() {
     const [isBottom, setIsBottom] = useState<boolean>(false);

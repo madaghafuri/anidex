@@ -7,7 +7,7 @@ export const apolloClient = new ApolloClient({
 
 export const GET_PAGE = gql`
     {
-        Page(page: 1, perPage: 10) {
+        Page(page: 1, perPage: 21) {
             media(type: MANGA) {
                 id
                 coverImage {

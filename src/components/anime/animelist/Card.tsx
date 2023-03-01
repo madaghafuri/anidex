@@ -90,6 +90,7 @@ const Card = ({ media }: CardProps) => {
 
     return (
         <div
+            tabIndex={0}
             className={classNames(
                 coreStyle,
                 additionalCoreStyle,
@@ -126,7 +127,7 @@ const Card = ({ media }: CardProps) => {
     );
 };
 
-const coreStyle = 'flex flex-row p-2.5 w-auto rounded-md';
+const coreStyle = 'flex flex-row p-2.5 w-auto rounded-md drop-shadow-md';
 
 const lineStyle = 'w-full bg-black h-0.5';
 

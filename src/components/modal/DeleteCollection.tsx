@@ -19,11 +19,11 @@ function DeleteCollection({ title }: DeleteCollectionProps) {
     };
 
     return (
-        <div className="flex flex-col gap-10">
+        <div className="flex flex-col gap-10 p-5">
             <Text size="xl" weight="bold">
                 Delete Collection
             </Text>
-            <Text>{`Do you wish to delete the collection ${title}?`}</Text>
+            <Text>{`Do you wish to delete the collection "${title}"?`}</Text>
             <div className="flex flex-row gap-4 self-end absolute bottom-3">
                 <Button>
                     <Text>Cancel</Text>

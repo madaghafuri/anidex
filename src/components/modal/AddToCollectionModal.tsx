@@ -3,7 +3,7 @@ import { toast } from 'react-toastify';
 import { useCollectionContext } from '../../context/CollectionContext';
 import { useModal } from '../../context/ModalContext';
 import { usePageContext } from '../../context/PageContext';
-import { getStorage, setStorage } from '../../utils/storage';
+import { getStorage } from '../../utils/storage';
 import CollectionList from '../collection/CollectionList';
 import Button from '../UI/Button';
 import Text from '../UI/Text';
@@ -36,6 +36,7 @@ function AddToCollectionModal() {
     };
 
     const handleCancel = () => {
+        setTempCollection([]);
         closeModal();
         return;
     };
@@ -49,31 +50,32 @@ function AddToCollectionModal() {
             });
         } else {
             setAddedTo((state) => {
-                const newState = [...state];
-                return newState.filter((item) => item !== event.target.value);
+                return state.filter((item) => item !== event.target.value);
             });
         }
     };
 
     return (
         <div className="flex flex-col gap-2">
-            <Text size="lg">Add to Collection</Text>
-            {(Object.entries(collectionObj) || []).map(([key], index) => (
-                <div key={index} className="flex flex-row gap-3 p-3">
-                    <input
-                        type="checkbox"
-                        className=""
-                        value={key}
-                        onChange={handleChecked}
-                    />
-                    <Text>{key}</Text>
-                </div>
-            ))}
-            <div className="w-full flex flex-row absolute bottom-3 justify-between">
+            <div className="flex flex-col gap-3 p-4">
+                <Text size="lg">Add to Collection</Text>
+                {(Object.entries(collectionObj) || []).map(([key], index) => (
+                    <div key={index} className="flex flex-row gap-3 p-3">
+                        <input
+                            type="checkbox"
+                            className=""
+                            value={key}
+                            onChange={handleChecked}
+                        />
+                        <Text>{key}</Text>
+                    </div>
+                ))}
+            </div>
+            <div className="w-full flex flex-row absolute bottom-3 justify-between p-3">
                 <Button onClick={handleEdit}>
                     <Text>Edit</Text>
                 </Button>
-                <div className="flex flex-row mr-4 gap-3">
+                <div className="flex flex-row gap-3">
                     <Button onClick={handleCancel}>
                         <Text>Cancel</Text>
                     </Button>
