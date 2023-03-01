@@ -22,7 +22,7 @@ type CardProps = {
 };
 
 const Card = ({ media }: CardProps) => {
-    const [timerId, setTimerId] = useState<number>();
+    const [timerId, setTimerId] = useState<number | NodeJS.Timer>();
 
     const updatedAt = dayjs.unix(media.updatedAt);
     const { currentTime } = useCurrentTime();
